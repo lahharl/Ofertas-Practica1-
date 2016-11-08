@@ -63,6 +63,8 @@ function provincias()
 
 function erroresform()
 {
+	$error = 0;
+	
 	/*Comprobar si un nombre existe*/
 	
 	$nombretrue= "|^[a-zA-Z]+(\s*[a-zA-Z]*)*[a-zA-Z]+$|";
@@ -81,107 +83,128 @@ function erroresform()
 	
 	
 	if ($_POST['descripcion'] == "")
-	{
-		$hayError=TRUE;
-		echo "<p style=\"color:red\">Error, la descripción está vacía/p>";
+	{		
+		$errores["descripcion"] = "<p style=\"color:red\">Error, la descripción está vacía";
+		echo $errores["descripcion"];
+		$error = 1;
 	}
 	
 	if (! preg_match($nombretrue, $_POST['persona_contacto']))
-	{
-		$hayError=TRUE;
-		echo "<p style=\"color:red\">Error, el formato del nombre de la persona es erróneo/p>";
+	{		
+		$errores["persona_contacto"] = "<p style=\"color:red\">Error, el formato del nombre de la persona es erróneo";
+		echo $errores["persona_contacto"];
+		$error = 1;
 	}
 	else
 	{
 		if ($_POST['persona_contacto'] == "")
 		{
-			$hayError=TRUE;
-			echo "<p style=\"color:red\">Error, el nombre de la persona está vacío/p>";
+			$errores["persona_contacto_vacio"] = "<p style=\"color:red\">Error, el nombre de la persona está vacío";
+			echo $errores["persona_contacto_vacio"];
+			$error = 1;
 		}
 	}
 	if (! preg_match ($tlftrue, $_POST['tlf_contacto']))
 	{
-		$hayError=TRUE;
-		echo "<p style=\"color:red\">Error, el formato del número de teléfono es erróneo/p>";
+		$errores["tlf_contacto"] = "<p style=\"color:red\">Error, el formato del número de teléfono es erróneo";
+		echo $errores["tlf_contacto"];
+		$error = 1;
 	}
 	else
 	{
 		if ($_POST['tlf_contacto'] == "")
-		{
-			$hayError=TRUE;
-			echo "<p style=\"color:red\">Error, el número de teléfono está vacío/p>";
+		{			
+			$errores["tlf_contacto_vacio"] = "<p style=\"color:red\">Error, el número de teléfono está vacío";
+			echo $errores["tlf_contacto_vacio"];
+			$error = 1;
 		}
 	}
 	if (! preg_match ($emailtrue, $_POST['email']))
-	{
-		$hayError=TRUE;
-		echo "<p style=\"color:red\">Error, el formato del email es erróneo/p>";
+	{		
+		$errores["email"] = "<p style=\"color:red\">Error, el formato del email es erróneo";
+		echo $errores["email"];
+		$error = 1;
 	}
 	else
 	{
 		if ($_POST['email'] == "")
-		{
-			$hayError=TRUE;
-			echo "<p style=\"color:red\">Error, el email está vacío/p>";
+		{			
+			$errores["email_vacio"] = "<p style=\"color:red\">Error, el email está vacío";
+			echo $errores["email_vacio"];
+			$error = 1;
 		}
 	}	
 	if (! preg_match ($cptrue, $_POST['codigo_postal']))
-	{
-		$hayError=TRUE;
-		echo "<p style=\"color:red\">Error, el formato del código postal es erróneo/p>";
+	{			
+		$errores["codigo_postal"] = "<p style=\"color:red\">Error, el formato del código postal es erróneo";
+		echo $errores["codigo_postal"];
+		$error = 1;
 	}
 	else
 	{
 		if ($_POST['codigo_postal'] == "")
-		{
-			$hayError=TRUE;
-			echo "<p style=\"color:red\">Error, el código postal no puede estar vacío/p>";
+		{			
+			$errores["codigo_postal_vacio"] = "<p style=\"color:red\">Error, el código postal no puede estar vacío";
+			echo $errores["codigo_postal_vacio"];
+			$error = 1;
 		}
 	}	
 	if ($_POST['tbl_provincias'] == "")
-	{
-		$hayError=TRUE;
-		echo "<p style=\"color:red\">Error, el campo provincia está vacío/p>";
+	{		
+		$errores["tbl_provincias"] = "<p style=\"color:red\">Error, el campo provincia está vacío";
+		echo $errores["tbl_provincias"];
+		$error = 1;
 	}
 	
 	if ($_POST['estado'] == "")
-	{
-		$hayError=TRUE;
-		echo "<p style=\"color:red\">Error, el campo estado está vacío/p>";
+	{		
+		$errores["estado"] = "<p style=\"color:red\">Error, el campo estado está vacío";
+		echo $errores["estado"];
+		$error = 1;
 	}
 	
 	
 	if (! preg_match ($nombretrue, $_POST['psicologo']))
-	{
-		$hayError=TRUE;
-		echo "<p style=\"color:red\">Error, el campo del psicólogo encargado no tiene un formato correcto/p>";
+	{		
+		$errores["psicologo"] = "<p style=\"color:red\">Error, el campo del psicólogo encargado no tiene un formato correcto";
+		echo $errores["psicologo"];
+		$error = 1;
 	}
 	
 	if (! preg_match ($nombretrue, $_POST['candidato']))
-	{
-		$hayError=TRUE;
-		echo "<p style=\"color:red\">Error, el campo del candidato seleccionado no tiene un formato correcto/p>";
+	{		
+		$errores["candidato"] = "<p style=\"color:red\">Error, el campo del candidato seleccionado no tiene un formato correcto";
+		echo $errores["candidato"];
+		$error = 1;
 	}	
 	
 	$datosfecha = explode ("/", $_POST['fecha_comunicacion']);
 	
 	if ($_POST['fecha_comunicacion'] == "")
-	{
-		$hayError=TRUE;
-		echo "<p style=\"color:red\">Error, el campo fecha de comunicación está vacío/p>";
+	{		
+		$errores["fecha_comunicacion_vacio"] =  "<p style=\"color:red\">Error, el campo fecha de comunicación está vacío";
+		echo $errores["fecha_comunicacion_vacio"];
+		$error = 1;
 	}
 		
 	if ($_POST['fecha_comunicacion']< $_POST['fecha_creacion'])
-	{
-		$hayError=true;
-		echo "<p style=\"color:red\">Error, la fecha dada es menor que la actual/p>";
+	{		
+		$errores["fecha_comunicacion_menor"] = "<p style=\"color:red\">Error, la fecha dada es menor que la actual";
+		echo $errores["fecha_comunicacion_menor"];
+		$error = 1;
 	}
 	
 	
 	if (! checkdate($datosfecha[0], $datosfecha[1], $datosfecha[2]))
+	{		
+		$errores["fecha_comunicacion"] = "<p style=\"color:red\">Error, la fecha introducida no es correcta";
+		echo $errores["fecha_comunicacion"];
+		$error = 1;
+	}
+	
+	if ($error == 1)
 	{
-		$hayError=true;
-		echo "<p style=\"color:red\">Error, la fecha introducida no es correcta/p>";
+		return TRUE;
 	}
 		
 }

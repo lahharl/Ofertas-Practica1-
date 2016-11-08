@@ -137,10 +137,32 @@ Class Db {
 		$sql = "INSERT INTO `$tabla`(".implode(',', $campos).")
 				 VALUES (".implode(',', $values)."); ";
 		
-		echo "<p>SQL:</p><pre>$sql</pre>";
+		/*echo "<p>SQL:</p><pre>$sql</pre>";*/
 	
 		$ok=$this->link->query($sql);
 		
+		if (! $ok)
+		{
+			echo "<p>Hay error: .".$this->link->error."</p>";
+			exit;
+		}
+	}
+	
+	public function Modificar($tabla, $tarea, $cod){
+	
+		$campos=array();
+	
+		foreach($tarea as $campo => $valor)
+		{
+			$campos[]='`'.$campo.'`="'.addslashes($valor).'"';
+		}
+		
+		$sql = "UPDATE `$tabla`
+				 SET ".implode(',', $campos)."
+				  WHERE cod = $cod";	
+	
+		$ok=$this->link->query($sql);
+	
 		if (! $ok)
 		{
 			echo "<p>Hay error: .".$this->link->error."</p>";

@@ -15,8 +15,7 @@ if (! $_POST)
 }
 
 else	
-{		
-	
+{			
 	$hayError = erroresform();
 	
 	if ($hayError)
@@ -43,9 +42,9 @@ else
 				"otros_candidato" => $_POST["datos_candidato"],
 		);
 		
-		AñadirOferta($oferta);
+		
+		ModificarOferta($oferta, $_GET['cod']);
 		
 		include_once 'index.php';
 	}
 }
-	
