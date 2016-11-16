@@ -81,7 +81,7 @@ Class Db {
 			}
 			$result=$this->result;
 		}
-		$this->regActual=$result->fetch_array();;
+		$this->regActual=$result->fetch_assoc();;
 		return $this->regActual;
 	}
 
@@ -170,4 +170,19 @@ Class Db {
 		}
 	}
 	
+	public function Eliminar($tabla, $cod)
+	{
+		
+		$sql = "DELETE FROM `$tabla`
+				  WHERE cod = $cod";
+		
+		$ok=$this->link->query($sql);
+		
+		if (! $ok)
+		{
+			echo "<p>Hay error: .".$this->link->error."</p>";
+			exit;
+		}
+		
+	}	
 }

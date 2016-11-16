@@ -19,8 +19,8 @@
         <td><?=$tarea['fecha_comunicacion']?></td>
         <td><?=$tarea['estado']?></td>
         <td>
-            <a href="?controllers=modificar&cod=<?=$tarea['cod']?>">[Modificar]</a> 
-            <a href="?controllers=del&cod=<?=$tarea['cod']?>">[Borrar]</a>
+            <a href="?controllers=modificar&cod=<?=$tarea['cod']?>"><input type="submit" value="Modificar"></a> 
+            <a href="?controllers=delete&cod=<?=$tarea['cod']?>"><input type="submit" value="Borrar"></a>
         </td>
     </tr>
 <?php endforeach; ?>

@@ -1,5 +1,15 @@
 <?php
 
+function VP($nombreCampo, $valorporDefecto='') 
+{
+	if (isset($_POST[$nombreCampo])) {
+		return $_POST[$nombreCampo];
+	}
+	else {
+		return $valorporDefecto;
+	}
+}
+
 function fechaActual ()
 {
 	$fecha = date("m/d/Y");
@@ -207,4 +217,60 @@ function erroresform()
 		return TRUE;
 	}
 		
+}
+
+function paginacion($total,$pp,$st,$url) {
+
+	if($total>$pp) {
+		$resto=$total%$pp;
+		if($resto==0) {
+			$pages=$total/$pp;
+		} else {
+			$pages=(($total-$resto)/$pp)+1;
+		}
+
+		if($pages>10) {
+			$current_page=($st/$pp)+1;
+			if($st==0) {
+				$first_page=0;
+				$last_page=10;
+			} else if($current_page>=5 && $current_page<=($pages-5)) {
+				$first_page=$current_page-5;
+				$last_page=$current_page+5;
+			} else if($current_page<5) {
+				$first_page=0;
+				$last_page=$current_page+5+(5-$current_page);
+			} else {
+				$first_page=$current_page-5-(($current_page+5)-$pages);
+				$last_page=$pages;
+			}
+		} else {
+			$first_page=0;
+			$last_page=$pages;
+		}
+
+		for($i=$first_page;$i< $last_page;$i++) {
+			$pge=$i+1;
+			$nextst=$i*$pp;
+			if($st==$nextst) {
+				$page_nav .= '<b>['.$pge.']';
+			} else {
+				$page_nav .= '<a href="'.$url.$nextst.'">'.$pge.'</a>';
+			}
+		}
+
+		if($st==0) { $current_page = 1; } else { $current_page = ($st/$pp)+1; }
+
+		if($current_page< $pages) {
+			$page_last = '<b>[<a href="'.$url.($pages-1)*$pp.'">>>></a>]';
+			$page_next = '[<a href="'.$url.$current_page*$pp.'">></a>]';
+		}
+
+		if($st>0) {
+			$page_first = '<b>[<a href="'.$url.'0">< <<</a>]</a></b>';
+			$page_previous = '[<a href="'.$url.''.($current_page-2)*$pp.'">< </a>]';
+		}
+	}
+
+	return "$page_first $page_previous $page_nav $page_next $page_last";
 }

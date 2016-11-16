@@ -8,7 +8,6 @@ include_once (MODEL_PATH.'classdb.php');
 
 $registros = provincias();
 
-
 if (! $_POST)
 {
 	include (VIEW_PATH.'altaform.php');
@@ -20,7 +19,7 @@ else
 	$hayError = erroresform();
 	
 	if ($hayError)
-	{
+	{			
 		include_once (VIEW_PATH.'altaform.php');
 	}
 	

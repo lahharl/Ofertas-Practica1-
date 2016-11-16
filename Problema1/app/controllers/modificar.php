@@ -6,12 +6,17 @@ include_once (MODEL_PATH.'funcionesbase.php');
 
 include_once (MODEL_PATH.'classdb.php');
 
+$tabla = 'ofertas';
+
+$anterior_oferta = RecuperarValores($_GET['cod'], $tabla);
+
+print_r($anterior_oferta);
+
 $registros = provincias();
 
-
 if (! $_POST)
-{
-	include (VIEW_PATH.'altaform.php');
+{	
+	include (VIEW_PATH.'modform.php');
 }
 
 else	
@@ -19,8 +24,8 @@ else
 	$hayError = erroresform();
 	
 	if ($hayError)
-	{
-		include_once (VIEW_PATH.'altaform.php');
+	{		
+		include_once (VIEW_PATH.'modform.php');
 	}
 	
 	else 
