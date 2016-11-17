@@ -1,33 +1,4 @@
 <?php
-function paginar_ofertas($tabla, $posIni, $pag, $maxPag)
-{
-	$bd=Db::getInstance();
-	
-	// Realizar una consulta MySQL
-	$query ="SELECT * FROM . $tabla . LIMIT $posIni,".PROXPAG;
-	
-	$rs= $bd -> Consulta($query);
-	
-	echo "<table>";
-	while($reg=$bd->LeeRegistro($rs)){
-	?>
-		<tr><td><?=$line['nombre']?></td></tr>
-			<?php 
-	}	
-	echo "</table>"
-	?>
-	<P>
-	<?php if ($pag>1): ?>
-		<a href="?pag=<?=$pag-1?>">Anterior</a>
-	<?php endif; ?>
-	<?php if ($pag<$maxPag-1) :?> 
-		<a href="?pag=<?=$pag+1?>">Siguiente</a>
-	<?php endif;?>
-		</P>
-</body>
-</html>
-<?php 
-}
 
 function Nregistros($tabla)
 {
@@ -35,9 +6,44 @@ function Nregistros($tabla)
 	
 	$query = "SELECT count(cod) as total FROM ". $tabla .";";
 	
-	$rs= $bd -> Consulta($query);
+	/*echo $query;*/
 	
-	$reg=$bd->LeeRegistro($rs);	
+	$rs= $bd -> Consulta($query);	
+	
+	$reg=$bd->LeeRegistro($rs);
+
+	return $reg['total'];
+}
+
+function RegistrosPagina($tabla, $pagi, $numer_reg)
+{
+	$bd=Db::getInstance();
+	
+	$consulta = "SELECT * FROM ". $tabla ." ORDER BY cod ASC LIMIT ".$pagi."," . $numer_reg;
+	
+	$rs= $bd -> Consulta($consulta);
+	
+	$ofertas=[];
+	while($reg=$bd->LeeRegistro($rs)) {
+		//print_r($reg);
+		$ofertas[]=$reg;
+	}
+	//print_r($ofertas);
+	
+	return $ofertas;
+}
+
+/* Pertenece a la primera ristra de funciones de paginacion
+ * 
+ * function RegistrosPagina($tabla, $inicio, $tamano)
+{
+	$bd=Db::getInstance();
+
+	$consulta = "SELECT * FROM ". $tabla ." ORDER BY cod ASC LIMIT ".$inicio."," . $tamano;
+
+	$rs= $bd -> Consulta($consulta);
+
+	$reg=$bd->LeeRegistro($rs);
 
 	return $reg;
-}
+}*/

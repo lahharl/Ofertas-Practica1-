@@ -10,8 +10,6 @@ $tabla = 'ofertas';
 
 $anterior_oferta = RecuperarValores($_GET['cod'], $tabla);
 
-print_r($anterior_oferta);
-
 $registros = provincias();
 
 if (! $_POST)
