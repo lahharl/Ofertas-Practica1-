@@ -10,20 +10,21 @@ include_once(MODEL_PATH.'funcionesbase.php');
 
 /*$tareas = RecogerOfertas($tabla);*/
 
-include_once (MODEL_PATH.'paginacion_ofertas.php');
+include_once (CTRL_PATH.'funcionespaginacion.php');
 
-include_once (CTRL_PATH.'Paginador.php');
+$url = '?controllers=listar&';
 
 define ('PROXPAG', 10);
+
 
 if (isset($_GET['pag']))
 	$pag=$_GET['pag'];
 else
 	$pag=1;
 
-$maxPag=((int) (NRegistros($tabla)-1)/PROXPAG)+1;
+$maxpag=ceil((int) (NRegistros($tabla)-1)/PROXPAG);
 
-if ($pag<1 || $pag>$maxPag)
+if ($pag<1 || $pag>$maxpag)
 	$pag=1;
 
 $posIni=(($pag-1)*PROXPAG)+1;

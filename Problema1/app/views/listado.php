@@ -26,12 +26,7 @@
 <?php endforeach; ?>
 </table>
 
-<?php if ($pag>1): ?>
-	<a href="?controllers=paginador<?=$pag-1?>">Anterior</a>
-<?php endif; ?>
-<?php if ($pag<$maxPag-1) :?> 
-	<a href="?controllers=paginador<?=$pag+1?>">Siguiente</a>
-<?php endif;?>
+<?php MuestraPaginador($pag, $maxpag, $url, $maxpag)?>
 
 
 
