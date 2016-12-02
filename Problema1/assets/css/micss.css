@@ -1,0 +1,37 @@
+h4 {
+    color: purple;
+    text-align: center;
+}
+
+h1 {
+    color: #3399ff;
+    text-align: center;
+}
+
+footer {
+	color: purple;
+	text-align: center;	
+	font-size: 20px;
+}
+
+h3 {
+	color:blue;
+	
+}
+
+h2 {
+	color: #669933;
+}
+
+td {
+	text-align: center;
+}
+
+.pull-left {
+  float: left;
+}
+
+.pull-left {
+  float: right;
+}
+

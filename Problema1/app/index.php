@@ -10,6 +10,7 @@ define('VIEW_PATH', __DIR__.'/views/');
 define('TEMPLATE_PATH', __DIR__.'/plantilla/');
 define('LIB_PATH', __DIR__.'/lib/');
 define('HELPERS_PATH', __DIR__.'/helpers/');
+define('ASSETS_PATH', __DIR__.'/../assets/css');
 
 ?>
 <html>

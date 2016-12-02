@@ -72,30 +72,11 @@ function EliminarOferta ($tarea, $cod)
 	$bd -> Eliminar('ofertas', $cod);
 }
 
-function RecogerOfertas ($tabla)
+function RecogerElemento($cod)
 {
 	$bd=Db::getInstance();
 	
-	$sql = "SELECT * FROM " . $tabla . " ORDER by cod ASC";
-	
-	//echo "SQL: $sql";
-	$rs= $bd -> Consulta($sql);
-	
-	$ofertas=[];
-	while($reg=$bd->LeeRegistro($rs)) {
-		//print_r($reg);
-		$ofertas[]=$reg;
-	}
-	//print_r($ofertas);
-	
-	return $ofertas;	
-}
-
-function RecogerOferta($tabla, $cod)
-{
-	$bd=Db::getInstance();
-	
-	$sql = "SELECT * FROM " . $tabla . " WHERE cod = ". $cod .";";	
+	$sql = "SELECT * FROM ofertas WHERE cod = ". $cod .";";	
 	
 	$rs= $bd -> Consulta($sql);
 	

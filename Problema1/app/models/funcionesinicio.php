@@ -5,9 +5,7 @@ function ConectarAdmin ($nombre, $tabla)
 	$_SESSION['nombre_usuario'] = $nombre;
 	$_SESSION['horaentrada'] = date("m.d.y");
 	$_SESSION['tipo'] = $_POST["tipo"];
-	echo "conectado";
 }
-
 function Entrada($tabla)
 {	
 	$bd=Db::getInstance();
@@ -57,3 +55,28 @@ function Errores ()
 		return TRUE;
 	}
 }
+
+function Repeticion ()
+{
+	$error = 0;
+	
+	$bd=Db::getInstance();
+	
+	$sql = "SELECT cod FROM usuarios WHERE username='". $_POST["nombre"] ."';";
+	
+	$rs= $bd -> Consulta($sql);
+	
+	$reg=$bd->LeeRegistro($rs);
+	
+	if ($reg["cod"] > 0)
+	{
+		$errores["repetido"] = "<p style=\"color:red\">Error, el nombre ya existe";
+		echo $errores["repetido"];
+		$error = 1;		
+	}
+	
+	if ($error == 1)
+	{
+		return TRUE;
+	}
+}	

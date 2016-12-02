@@ -23,14 +23,14 @@ function RegistrosPagina($tabla, $pagi, $numer_reg)
 
 	$rs= $bd -> Consulta($consulta);
 
-	$ofertas=[];
+	$lista=[];
 	while($reg=$bd->LeeRegistro($rs)) {
 		//print_r($reg);
-		$ofertas[]=$reg;
+		$lista[]=$reg;
 	}
 	//print_r($ofertas);
 
-	return $ofertas;
+	return $lista;
 }
 
 /** Muestra un paginador para una lista de elementos
@@ -43,10 +43,10 @@ function MuestraPaginador($pag_actual, $nPags, $url, $maxpag)
 {
 	// Mostramos paginador
 	echo '<div style="text-align=center">';
-	echo EnlaceAPagina($url, 1, 'Inicio');
+	echo EnlaceAPagina($url, 1, 'Inicio', $pag_actual>1);
 	echo EnlaceAPagina($url, $pag_actual-1, 'Anterior', $pag_actual>1);	
 	echo EnlaceAPagina($url, $pag_actual+1, 'Siguiente', $pag_actual<$nPags);
-	echo EnlaceAPagina($url, $maxpag, 'Fin');
+	echo EnlaceAPagina($url, $maxpag, 'Fin', $pag_actual<$nPags);
 	echo "</div>";
 }
 
@@ -63,9 +63,34 @@ function MuestraPaginador($pag_actual, $nPags, $url, $maxpag)
 function EnlaceAPagina($url, $pag, $texto, $activo=true)
 {
 	if ($activo)
-		return '<a href="'.$url.'pag='.$pag.'">'.$texto.'</a> ';
-	else
-		return $texto;
+	{
+		if ($texto == 'Siguiente')
+		{
+			return '<a href="'.$url.'pag='.$pag.'"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a> ';
+		}
+		else 
+		{
+			if  ($texto =='Fin')				
+			{
+				return '<a href="'.$url.'pag='.$pag.'"><span class="glyphicon glyphicon-forward" aria-hidden="true"></span></a> ';
+			}
+			else
+			{
+				if ($texto =='Anterior')
+				{
+					return '<a href="'.$url.'pag='.$pag.'"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a> ';
+				}
+				else 
+				{
+					if ($texto =='Inicio')
+					{
+						return '<a href="'.$url.'pag='.$pag.'"><span class="glyphicon glyphicon-backward" aria-hidden="true"></span></a> ';
+					}
+				}
+			}
+		}
+		
+	}	
 }
 
 /* Pertenece a la primera ristra de funciones de paginacion

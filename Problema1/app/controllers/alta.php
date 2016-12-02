@@ -44,7 +44,7 @@ else
 		
 		AñadirOferta($oferta);
 		
-		include_once 'index.php';
+		include_once (CTRL_PATH.'listar.php');
 	}
 }
 	

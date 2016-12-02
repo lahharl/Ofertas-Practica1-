@@ -8,8 +8,6 @@ $tabla = 'ofertas';
 
 include_once(MODEL_PATH.'funcionesbase.php');
 
-/*$tareas = RecogerOfertas($tabla);*/
-
 include_once (CTRL_PATH.'funcionespaginacion.php');
 
 $url = '?controllers=listar&';
@@ -27,7 +25,7 @@ $maxpag=ceil((int) (NRegistros($tabla)-1)/PROXPAG);
 if ($pag<1 || $pag>$maxpag)
 	$pag=1;
 
-$posIni=(($pag-1)*PROXPAG)+1;
+$posIni=(($pag-1)*PROXPAG);
 
 $tareas = RegistrosPagina($tabla, $posIni, PROXPAG);
 

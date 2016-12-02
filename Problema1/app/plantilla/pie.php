@@ -1,3 +1,3 @@
-<footer style="background: #ccffcc; clear: both;">
-    Pie de página
+<footer style="background: #ccffff; clear: both;">
+    ¡Siéntase como en casa!
 </footer>

@@ -48,6 +48,6 @@ else
 		
 		ModificarOferta($oferta, $_GET['cod']);
 		
-		include_once 'index.php';
+		include_once (CTRL_PATH.'listar.php');
 	}
 }

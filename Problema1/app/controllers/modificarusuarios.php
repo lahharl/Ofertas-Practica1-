@@ -1,25 +1,31 @@
 <?php
 
-include_once (CTRL_PATH.'functions.php');
-
 include_once (MODEL_PATH.'funcionesinicio.php');
-
-include_once (MODEL_PATH.'classdb.php');
 
 include_once (MODEL_PATH.'funcionesusuario.php');
 
+include_once (MODEL_PATH.'funcionesbase.php');
+
+include_once (MODEL_PATH.'classdb.php');
+
+$tabla = 'usuarios';
+
+$anterior_usuario = RecuperarValores($_GET['cod'], $tabla);
+
 if (! $_POST)
-{
-	include_once (VIEW_PATH.'anadirusuarioform.php');
+{	
+	include (VIEW_PATH.'modificarusuariosform.php');
 }
 
-else
-{
+else	
+{		
+	
 	if (Errores() || Repeticion())
 	{			
-		include_once(VIEW_PATH.'anadirusuarioform.php');		
+		include (VIEW_PATH.'modificarusuariosform.php');
 	}
-	else
+	
+	else 
 	{
 		$usuario = array (
 				"username" => $_POST["nombre"],
@@ -27,8 +33,9 @@ else
 				"tipo" => $_POST["tipo"]
 				);
 		
-		AñadirUsuario($usuario);
+		
+		ModificarUsuario($usuario, $_GET['cod']);
 		
 		include_once (CTRL_PATH.'listarusuarios.php');
-	}	
+	}
 }
